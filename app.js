@@ -251,7 +251,7 @@ app.use(express.static("./"));
 
 // Fallback route to handle frontend paths
 app.get("*", (req, res) => {
-    res.sendFile("./index.html");
+    res.sendFile(path.resolve(__dirname, "index.html"));
 });
 
 app.listen(PORT,()=>{
