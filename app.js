@@ -120,7 +120,7 @@ app.post("/forgot-password", async (req, res) => {
         await user.save();
 
         // Send email with reset link
-        const resetLink = `http://localhost:8000/reset-password/${token}`;
+        const resetLink = `https://nutrition-1-1.onrender.com/reset-password/${token}`;
         const receiver = {
             from: process.env.MY_GMAIL,
             to: email,
