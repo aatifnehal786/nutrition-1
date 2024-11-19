@@ -247,11 +247,16 @@ app.get("/track/:userid/:date",verifiedToken,async (req,res)=>{
 const path = require("path");
 
 // Serve React static files
-app.use(express.static("./"));
+app.use(express.static(path.resolve(__dirname, "public")));
 
-// Fallback route to handle frontend paths
+// Fallback route for frontend paths
 app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "index.html"));
+    const accept = req.headers.accept || "";
+    if (accept.includes("text/html")) {
+        res.sendFile(path.resolve(__dirname, "public", "index.html"));
+    } else {
+        res.status(404).send("Not Found");
+    }
 });
 
 app.listen(PORT,()=>{
